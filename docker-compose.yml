@@ -11,3 +11,4 @@ services:
     volumes:
       # joga o setup sql para o setup do docker assim que subir o container
       - ./docker/setup.sql:/docker-entrypoint-initdb.d/setup.sql
+    restart: unless-stopped
