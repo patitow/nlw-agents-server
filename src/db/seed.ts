@@ -5,15 +5,20 @@ import { schema } from './schema/index.ts'
 
 // Ele reseta o banco e depois faz o seed do banco -> Criação de tabelas de exemplo
 await reset(db, { schema })
+await db.execute('TRUNCATE TABLE "questions" CASCADE;')
+await db.execute('TRUNCATE TABLE "rooms" CASCADE;')
 
-await seed(db, schema).refine((f) => {
+await seed(db, schema).refine(f => {
   return {
     rooms: {
-      count: 20,
+      count: 5,
       columns: {
         name: f.companyName(),
         description: f.loremIpsum(),
       },
+    },
+    questions: {
+      count: 10,
     },
   }
 })
